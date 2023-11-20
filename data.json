@@ -1,0 +1,38 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Food",
+      "description": "BlaBlaBla",
+      "created_at": "2023-11-20T05:50:19.407Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Drinks",
+      "description": "BeBeBe",
+      "created_at": "2023-11-20T05:50:19.407Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Meals",
+      "description": "MuMuMu",
+      "created_at": "2023-11-20T05:50:19.407Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "name": "Sweets",
+      "description": "MiMiMi",
+      "created_at": "2023-11-20T05:50:19.407Z"
+    }
+  }
+]
