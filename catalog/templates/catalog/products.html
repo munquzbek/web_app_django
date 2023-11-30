@@ -1,5 +1,4 @@
 {% extends 'catalog/base.html'%}
-
 {% block content %}
 {% load my_tags %}
 {% for product in product_list %}
@@ -11,7 +10,7 @@
         <h6 class="card-subtitle mb-2 text-body-secondary">{{ product.create_date }}</h6>
         <p class="card-text">{{ product.description|slice:"0:100" }}...</p>
         <h1 class="card-title pricing-card-title">{{ product.price }}$<small class="text-muted">/peace</small></h1>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="{% url 'catalog:product' product.id %}" class="btn btn-primary">More</a>
     </div>
 </div>
 {% endfor %}

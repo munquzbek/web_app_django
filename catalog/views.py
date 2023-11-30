@@ -24,3 +24,12 @@ def products(request):
         'title': 'Products page'
     }
     return render(request, 'catalog/products.html', context)
+
+
+def product(request, pk):
+    product = Product.objects.get(pk=pk)
+    context = {
+        'product': product
+    }
+    return render(request, 'catalog/product.html', context)
+
