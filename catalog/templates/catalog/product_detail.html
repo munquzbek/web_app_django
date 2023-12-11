@@ -1,0 +1,25 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+{% load my_tags %}
+<div class="card mb-3" style="max-width: max;">
+    <div class="row g-3">
+        <div class="col-md-2">
+            <img src="{% mediapath product.image %}" class="img-fluid rounded-start" alt="...">
+            <p class="card-text"><small class="text-body-secondary">Created date: {{ product.create_date}}</small>
+                <br>
+                <small>Last update: {{ product.date_last_change }}</small></p>
+        </div>
+        <div class="col-md-6">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name|title }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+                <div>
+                    <button type="button" class="btn btn-outline-success" style="max-width: 100%;">Buy For<h4>
+                        ${{ product.price }}</h4>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
