@@ -7,7 +7,7 @@ NULLABLE = {'null': True, 'blank': True}
 # create new model, after creating write makemigrations, migrate
 class Blog(models.Model):
     title = models.CharField(max_length=150, verbose_name='Заголовок')
-    slug = models.CharField(max_length=150, verbose_name='slug')
+    slug = models.CharField(max_length=150, **NULLABLE, verbose_name='slug')
     content = models.TextField(verbose_name='Содержимое')
     image = models.ImageField(upload_to='blog/', **NULLABLE, verbose_name='Изображение')
     create_date = models.DateField(auto_now=True, verbose_name='Дата создания')

@@ -1,12 +1,14 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
 <article class="blog-post">
-    <h2 class="display-5 link-body-emphasis mb-1">{{ object.title }}</h2>
+    <h2 class="display-5 link-body-emphasis mb-1">{{ object.title }} ({{ object.slug }})</h2>
     <p class="fw-light">{{ object.create_date }}, <a href="#">User</a></p>
     <p>{{ object.content }}</p>
     <img src="/media/{{object.image}}"/>
     <hr>
+    <p class="text-end">
+    Views: {{ object.views_count }}
+</p>
 </article>
-<div class="col-6">
-</div>
+
 {% endblock %}
