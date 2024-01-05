@@ -1,17 +1,29 @@
 {% extends 'catalog/base.html'%}
 {% block content %}
 {% load my_tags %}
-{% for product in product_list %}
-<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="{% mediapath product.image %}"
-         alt="Card image cap">
-    <div class="card-body">
-        <h4 class="card-title">{{ product|title }}</h4>
-        <h6 class="card-subtitle mb-2 text-body-secondary">{{ product.create_date }}</h6>
-        <p class="card-text">{{ product.description|slice:"0:100" }}...</p>
-        <h1 class="card-title pricing-card-title">{{ product.price }}$<small class="text-muted">/peace</small></h1>
-        <a href="{% url 'catalog:product' product.id %}" class="btn btn-primary">More</a>
+
+<div class="col-lg-12 col-xxl-5 my-3 mx-auto">
+    <div class="d-grid gap-4">
+        <a class="btn btn-primary" type="button" href="{% url 'catalog:create_product' %}">Add new Product</a>
     </div>
 </div>
+
+{% for product in product_list %}
+<div class="col-4">
+    <div class="card" style="width: 19rem;">
+        <img class="card-img-top" src="{% mediapath product.image %}"
+             alt="Card image cap">
+        <div class="card-body">
+            <h4 class="card-title">{{ product|title }}</h4>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{ product.create_date }}</h6>
+            <p class="card-text">{{ product.description|slice:"0:100" }}...</p>
+            <h1 class="card-title pricing-card-title">{{ product.price }}$<small class="text-muted">/peace</small></h1>
+            <a href="{% url 'catalog:product' product.id %}" class="btn btn-primary">More</a>
+            <a href="{% url 'catalog:update_product' product.id %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'catalog:delete_product' product.id %}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+</div>
+<hr>
 {% endfor %}
 {% endblock %}
