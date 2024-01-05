@@ -1,0 +1,23 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-5 shadow">
+            <div class="modal-body p-9 text-center">
+                <h5 class="mb-0">Delete this product?</h5>
+                <p class="mb-0">{{ object.name }}</p>
+            </div>
+            <form class="modal-footer flex-nowrap p-0" method="post">
+                {% csrf_token %}
+                <button type="submit"
+                        class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end">
+                    <strong>Yes, delete</strong></button>
+                <a href="{% url 'blog:blog_list' %}" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0"
+                        data-bs-dismiss="modal">No, cancel
+                </a>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
