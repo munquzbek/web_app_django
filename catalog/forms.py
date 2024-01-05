@@ -1,11 +1,18 @@
 from django import forms
 
-from catalog.models import Product
+from catalog.models import Product, Version
 
 BAD_WORDS = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция']
 
 
-class ProductCreateForm(forms.ModelForm):
+class StyleFormMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control'
+
+
+class ProductCreateForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
         fields = '__all__'  # use all fields
@@ -28,4 +35,12 @@ class ProductCreateForm(forms.ModelForm):
                 raise forms.ValidationError('Ошибка, связанная с плохими словами в названии')
 
         return cleaned_data
+
+
+class VersionForm(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = Version
+        fields = '__all__'
+
+
 

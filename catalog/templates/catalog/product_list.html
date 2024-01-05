@@ -9,21 +9,24 @@
 </div>
 
 {% for product in product_list %}
-<div class="col-3">
-    <div class="card" style="width: 19rem;">
-        <img class="card-img-top" src="{% mediapath product.image %}"
-             alt="Card image cap">
-        <div class="card-body">
-            <h4 class="card-title">{{ product|title }}</h4>
-            <h6 class="card-subtitle mb-2 text-body-secondary">{{ product.create_date }}</h6>
-            <p class="card-text">{{ product.description|slice:"0:100" }}...</p>
-            <h1 class="card-title pricing-card-title">{{ product.price }}$<small class="text-muted">/peace</small></h1>
-            <a href="{% url 'catalog:product' product.id %}" class="btn btn-primary">More</a>
-            <a href="{% url 'catalog:update_product' product.id %}" class="btn btn-warning">Edit</a>
-            <a href="{% url 'catalog:delete_product' product.id %}" class="btn btn-danger">Delete</a>
+
+    <div class="col-3">
+        <br>
+        <div class="card">
+            <img class="card-img-top" src="{% mediapath product.image %}"
+                 alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title">{{ product|title }}</h4>
+                <h6 class="card-subtitle mb-2 text-body-secondary">{{ product.create_date }}</h6>
+                <p class="card-text">{{ product.description|slice:"0:100" }}...</p>
+                <h1 class="card-title pricing-card-title">{{ product.price }}$<small class="text-muted">/peace</small>
+                </h1>
+                <a href="{% url 'catalog:product' product.id %}" class="btn btn-outline-primary">More</a>
+                <a href="{% url 'catalog:update_product' product.id %}" class="btn btn-outline-warning">Edit</a>
+                <a href="{% url 'catalog:delete_product' product.id %}" class="btn btn-outline-danger">Delete</a>
+            </div>
         </div>
     </div>
-</div>
-<hr>
+
 {% endfor %}
 {% endblock %}

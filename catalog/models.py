@@ -9,7 +9,7 @@ class Category(models.Model):
     created_at = models.DateTimeField(auto_now=True, verbose_name='дата создания категории')
 
     def __str__(self):
-        return f'{self.name}, {self.description}'
+        return f'{self.name}'
 
     class Meta:
         verbose_name = 'Категория'
@@ -34,4 +34,17 @@ class Product(models.Model):
         verbose_name_plural = 'Продукты'
 
 
+class Version(models.Model):
+    number = models.CharField(max_length=100, verbose_name='номер версии')
+    name = models.CharField(max_length=150, verbose_name='название версии')
+    tag = models.BooleanField(default=True, verbose_name='признак версии')
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='продукт')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Версия'
+        verbose_name_plural = 'Версии'
 
