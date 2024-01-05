@@ -48,12 +48,13 @@
 </header>
 
 <main role="main">
-
+    {% if title %}
     <section class="jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">{{ title }}</h1>
         </div>
     </section>
+    {% endif %}
 
     <div class="album py-5 bg-light">
         <div class="container">

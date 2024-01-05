@@ -1,25 +1,40 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
 {% load my_tags %}
-<div class="card mb-3" style="max-width: max;">
-    <div class="row g-3">
-        <div class="col-md-2">
-            <img src="{% mediapath product.image %}" class="img-fluid rounded-start" alt="...">
-            <p class="card-text"><small class="text-body-secondary">Created date: {{ product.create_date}}</small>
-                <br>
-                <small>Last update: {{ product.date_last_change }}</small></p>
-        </div>
-        <div class="col-md-6">
-            <div class="card-body">
-                <h5 class="card-title">{{ product.name|title }}</h5>
-                <p class="card-text">{{ product.description }}</p>
-                <div>
-                    <button type="button" class="btn btn-outline-success" style="max-width: 100%;">Buy For<h4>
-                        ${{ product.price }}</h4>
-                    </button>
-                </div>
-            </div>
-        </div>
+<style>
+p {
+    word-break: break-all;
+    white-space: normal;
+}
+
+
+
+
+
+
+
+
+</style>
+<article class="blog-post">
+    <p>{{ product.category }}</p>
+    <img src="/media/{{product.image}}"/>
+    <div>
+        <h2 class="display-5 link-body-emphasis mb-1">{{ product.title }}</h2>
+        <h5 class="card-title">Name: {{ product.name|title }}</h5>
+        <p>
+            Description: {{ product.description }}
+        </p>
+        <button type="button" class="btn btn-outline-success" style="max-width: 100%;">
+            Buy For
+                <h4>
+                    ${{ product.price }}
+                </h4>
+        </button>
+        <hr>
+        <p class="fw-light">Created date: {{ product.create_date}}</p>
+        <p>Last update: {{ product.date_last_change }}</p>
     </div>
-</div>
+</article>
+
 {% endblock %}
+

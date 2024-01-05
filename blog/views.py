@@ -1,4 +1,4 @@
-from django.shortcuts import render
+
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from pytils.translit import slugify
