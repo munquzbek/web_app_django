@@ -9,12 +9,9 @@ p {
 
 
 
-
-
-
-
-
 </style>
+
+
 <article class="blog-post">
     <p>{{ product.category }}</p>
     <img src="/media/{{product.image}}"/>
@@ -26,14 +23,27 @@ p {
         </p>
         <button type="button" class="btn btn-outline-success" style="max-width: 100%;">
             Buy For
-                <h4>
-                    ${{ product.price }}
-                </h4>
+            <h4>
+                ${{ product.price }}
+            </h4>
         </button>
         <hr>
-        <p class="fw-light">Created date: {{ product.create_date}}</p>
-        <p>Last update: {{ product.date_last_change }}</p>
     </div>
+    {% for version in versions %}
+    {% if version.tag == True %}
+    <div class="card">
+        <div class="card-header">
+            Name of version: {{ version }}
+        </div>
+        <div class="card-body">
+            Number of version: {{ version.number }}
+            <p>Is active: {{ version.tag }} </p>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    <p class="fw-light" align="right">Created date: {{ product.create_date}}</p>
+    <p align="right"> Last update: {{ product.date_last_change }}</p>
 </article>
 
 {% endblock %}

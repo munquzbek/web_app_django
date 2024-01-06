@@ -3,6 +3,7 @@ from django import forms
 from catalog.models import Product, Version
 
 BAD_WORDS = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция']
+COUNT = []
 
 
 class StyleFormMixin:
@@ -41,6 +42,4 @@ class VersionForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Version
         fields = '__all__'
-
-
 
