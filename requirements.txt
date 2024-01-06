@@ -2,3 +2,5 @@ Django
 Pillow
 psycopg2
 pytils
+django-countries==7.5.1
+pyuca==1.2
