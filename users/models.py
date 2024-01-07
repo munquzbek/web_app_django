@@ -12,7 +12,7 @@ class User(AbstractUser):
 
     phone = models.CharField(max_length=35, verbose_name='номер', **NULLABLE)
     avatar = models.ImageField(upload_to='users/', verbose_name='аватар', **NULLABLE)
-    country = CountryField()  # installed package django-countries with pyuca translation
+    country = CountryField(verbose_name='страна')  # installed package django-countries with pyuca translation
 
     USERNAME_FIELD = "email"  # through what log in
     REQUIRED_FIELDS = []
