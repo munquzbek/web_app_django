@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +39,6 @@ INSTALLED_APPS = [
 
     'catalog',
     'blog',
-    'users',
 ]
 
 MIDDLEWARE = [
@@ -136,10 +136,12 @@ LOGOUT_REDIRECT_URL = '/'
 
 
 # For Django Email Backend
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'dev.mor@yandex.ru'
 EMAIL_HOST_PASSWORD = 'rdgmzzajokwxvull'  # os.environ['password_key'] suggested
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
