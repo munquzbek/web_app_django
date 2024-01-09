@@ -5,16 +5,17 @@ p {
     word-break: break-all;
     white-space: normal;
 }
-
 </style>
+
 <article class="blog-post">
     <div>
-        <h2 class="display-5 link-body-emphasis mb-1">{{ object.title }}</h2>
-        <p class="fw-light">{{ object.create_date }}, <a href="#">User</a></p>
+        <h2 align="center" class="display-5 link-body-emphasis mb-1">{{ object.title }}</h2>
+
+        <img src="/media/{{object.image}}"/>
+        <p class="fw-light">{{ object.create_date }}, <a href="#">user</a></p>
         <p>
             {{ object.content }}
         </p>
-        <img src="/media/{{object.image}}"/>
         <hr>
     </div>
 </article>

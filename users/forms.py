@@ -14,7 +14,10 @@ class UserRegisterForm(UserCreationForm):
 class UserProfileForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name', 'phone', 'country', 'avatar',)
+        fields = ('email', 'first_name', 'last_name', 'phone', 'country', 'avatar', 'is_verified')
+        widgets = {
+            'is_verified': forms.TextInput(attrs={'disabled': True}),
+        }
 
     def __init__(self, *args, **kwargs):
         """This need to do not show:

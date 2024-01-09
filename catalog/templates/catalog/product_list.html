@@ -1,31 +1,59 @@
 {% extends 'catalog/base.html'%}
 {% block content %}
 {% load my_tags %}
-
-<div class="col-lg-12 col-xxl-5 my-3 mx-auto">
-    <div class="d-grid gap-4">
-        <a class="btn btn-outline-dark" type="button" href="{% url 'catalog:create_product' %}">Add new Product</a>
-    </div>
-</div>
-
-{% for product in product_list %}
-    <div class="col-3">
-        <br>
-        <div class="card">
-            <img class="card-img-top" src="{% mediapath product.image %}"
-                 alt="Card image cap">
-            <div class="card-body">
-                <h4 class="card-title">{{ product|title }}</h4>
-                <h6 class="card-subtitle mb-2 text-body-secondary">{{ product.create_date }}</h6>
-                <p class="card-text">{{ product.description|slice:"0:100" }}...</p>
-                <h1 class="card-title pricing-card-title">{{ product.price }}$<small class="text-muted">/peace</small>
-                </h1>
-                <a href="{% url 'catalog:product' product.id %}" class="btn btn-outline-primary">More</a>
-                <a href="{% url 'catalog:update_product' product.id %}" class="btn btn-outline-warning">Edit</a>
-                <a href="{% url 'catalog:delete_product' product.id %}" class="btn btn-outline-danger">Delete</a>
-            </div>
+{% if user.is_authenticated %}
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h4>To add product click button below </h4>
+        </div>
+        <div class="card-body">
+            <a class="btn btn-outline-dark" type="button" href="{% url 'catalog:create_product' %}">Add Product</a>
         </div>
     </div>
+    <br>
+</div>
 
+{% else %}
+<div class="col-12">
+    <div class="card">
+        <div class="card-header">
+            <h5>You cannot add products, first sign up or log in to your account</h5>
+        </div>
+        <div class="card-body">
+            <a class="btn btn-outline-dark" type="button" href="{% url 'users:register' %}">SignUp</a>
+            <a class="btn btn-outline-dark" type="button" href="{% url 'users:login' %}">LogIn</a>
+        </div>
+    </div>
+    <br>
+</div>
+
+{% endif %}
+
+
+{% for product in product_list %}
+<br>
+<div class="col-3">
+    <div class="card">
+        <h5 class="card-title">Author: {{ product.user }}</h5>
+        <div class="card-header">
+            <img class="card-img-top" src="{% mediapath product.image %}"
+                 alt="Card image cap">
+        </div>
+        <div class="card-body">
+            <h4 class="card-title">{{ product|title }}</h4>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{{ product.create_date }}</h6>
+            <p class="card-text">{{ product.description|slice:"0:100" }}...</p>
+            <h1 class="card-title pricing-card-title">{{ product.price }}$<small
+                    class="text-muted">/peace</small>
+            </h1>
+            <a href="{% url 'catalog:product' product.id %}" class="btn btn-outline-primary">More</a>
+            <a href="{% url 'catalog:update_product' product.id %}" class="btn btn-outline-warning">Edit</a>
+            <a href="{% url 'catalog:delete_product' product.id %}" class="btn btn-outline-danger">Delete</a>
+        </div>
+    </div>
+</div>
 {% endfor %}
+
+</div>
 {% endblock %}

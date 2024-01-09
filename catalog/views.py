@@ -1,5 +1,5 @@
 from django.forms import inlineformset_factory
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -73,6 +73,9 @@ class ProductCreateView(CreateView):
     def form_valid(self, form):
         formset = self.get_context_data()['formset']
         self.object = form.save()
+        user = self.request.user
+        self.object.user = user
+
         if formset.is_valid():
             formset.instance = self.object
             formset.save()

@@ -16,9 +16,9 @@ class StyleFormMixin:
 class ProductCreateForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        fields = '__all__'  # use all fields
+        # fields = '__all__'  # use all fields
         # fields = ('name',)  # use only listed fiedls
-        # exclude = ('date_last_change',)  # use all except these
+        exclude = ('user',)  # use all except these
         # write only one option
 
     def clean_name(self):
