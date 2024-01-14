@@ -20,3 +20,11 @@ class User(AbstractUser):
 
     USERNAME_FIELD = "email"  # through what log in
     REQUIRED_FIELDS = []
+
+    class Meta:
+        permissions = [
+            (
+                'check_verification',
+                'Can check email verification of account'
+            )
+        ]

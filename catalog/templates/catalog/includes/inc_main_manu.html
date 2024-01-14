@@ -5,7 +5,9 @@
     <ul class="list-unstyled">
             <li><a href="{% url 'catalog:home' %}" class="text-dark">Home</a></li>
             <li><a href="{% url 'catalog:contact' %}" class="text-dark">Contact</a></li>
+        {% if user.is_verified %}
             <li><a href="{% url 'catalog:products' %}" class="text-dark">Products</a></li>
             <li><a href="{% url 'blog:blog_list' %}" class="text-dark">Blog</a></li>
+        {% endif %}
     </ul>
 </div>

@@ -145,3 +145,5 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
+
+LOGIN_URL = '/users/login'

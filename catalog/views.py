@@ -1,12 +1,24 @@
+from django.contrib import messages
+
 from django.forms import inlineformset_factory
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from catalog.forms import ProductCreateForm, VersionForm
 from catalog.models import Product, Version
 
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
+
+class UserIsVerified(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_verified
+
+
+@login_required
+@user_passes_test(lambda u: u.is_verified, login_url='users/verify_email/')
 def home(request):
     context = {
         'title': 'Home page'
@@ -14,11 +26,13 @@ def home(request):
     return render(request, 'catalog/home.html', context)
 
 
+@login_required
 def contact(request):
     context = {
-        'title': 'Contact page'
+        'title': 'Contact'
     }
     return render(request, 'catalog/contact.html', context)
+
 
 # Function Based View
 # def products(request):
@@ -31,8 +45,9 @@ def contact(request):
 
 
 # Class Based View the same as 'def products(request):' (previous function)
-class ProductListView(ListView):
+class ProductListView(LoginRequiredMixin, UserIsVerified, ListView):
     model = Product
+
 
 # FBV
 # def product(request, pk):
@@ -45,7 +60,7 @@ class ProductListView(ListView):
 
 
 # CBV
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, UserIsVerified, DetailView):
     model = Product
 
     def get_context_data(self, **kwargs):
@@ -54,7 +69,7 @@ class ProductDetailView(DetailView):
         return context_data
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, UserIsVerified, CreateView):
     model = Product
     success_url = reverse_lazy('catalog:products')
     form_class = ProductCreateForm
@@ -83,7 +98,7 @@ class ProductCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UserIsVerified,  UpdateView):
     model = Product
     success_url = reverse_lazy('catalog:products')
     form_class = ProductCreateForm
@@ -107,6 +122,6 @@ class ProductUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, UserIsVerified, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:products')

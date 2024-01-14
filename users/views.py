@@ -1,3 +1,4 @@
+from catalog.views import UserIsVerified
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.views import PasswordResetView
 from django.urls import reverse_lazy
@@ -9,6 +10,15 @@ from users.models import User
 
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+def verify_email(request):
+    context = {
+        'title': 'Verify email'
+    }
+    return render(request, 'users/verify_email.html', context)
 
 
 def success(request):
@@ -56,7 +66,7 @@ class RegisterView(CreateView):
         return super().form_valid(form)
 
 
-class ProfileView(UpdateView):
+class ProfileView(LoginRequiredMixin, UserIsVerified, UpdateView):
     model = User
     form_class = UserProfileForm
     success_url = reverse_lazy('users:profile')
@@ -66,7 +76,7 @@ class ProfileView(UpdateView):
         return self.request.user
 
 
-class PasswordResetView1(PasswordResetView):
+class PasswordResetView1(LoginRequiredMixin, UserIsVerified, PasswordResetView):
     from_email = settings.EMAIL_HOST_USER
     success_url = reverse_lazy("users:password_reset_done")
 

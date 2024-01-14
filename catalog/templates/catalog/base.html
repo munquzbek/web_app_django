@@ -32,11 +32,13 @@
             </button>
             <div>
                 {% if user.is_authenticated %}
-                <a href="{% url 'users:logout' %}" type="button" class="btn btn-outline-danger" >Logout</a>
-                <a href="{% url 'users:profile' %}" type="button" class="btn btn-outline-dark" >Profile</a>
+                    <a href="{% url 'users:logout' %}" type="button" class="btn btn-outline-danger" >Logout</a>
+                    {% if user.is_verified %}
+                        <a href="{% url 'users:profile' %}" type="button" class="btn btn-outline-dark" >Profile</a>
+                    {% endif %}
                 {% else %}
-                <a href="{% url 'users:login' %}" type="button" class="btn btn-outline-success" >Login</a>
-                <a href="{% url 'users:register' %}" type="button" class="btn btn-success">Sign-up</a>
+                    <a href="{% url 'users:login' %}" type="button" class="btn btn-outline-success" >Login</a>
+                    <a href="{% url 'users:register' %}" type="button" class="btn btn-success">Sign-up</a>
                 {% endif %}
             </div>
         </div>
