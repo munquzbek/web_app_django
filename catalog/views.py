@@ -1,5 +1,3 @@
-from django.contrib import messages
-
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -9,7 +7,9 @@ from catalog.forms import ProductCreateForm, VersionForm
 from catalog.models import Product, Version
 
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
+
+from django.http import Http404
 
 
 class UserIsVerified(UserPassesTestMixin):
@@ -98,10 +98,16 @@ class ProductCreateView(LoginRequiredMixin, UserIsVerified, CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(LoginRequiredMixin, UserIsVerified,  UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UserIsVerified, UpdateView):
     model = Product
     success_url = reverse_lazy('catalog:products')
     form_class = ProductCreateForm
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        if self.object.user != self.request.user and not self.request.user.is_staff:
+            raise Http404
+        return self.object
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)

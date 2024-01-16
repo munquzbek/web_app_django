@@ -14,7 +14,8 @@ class User(AbstractUser):
 
     phone = models.CharField(max_length=35, verbose_name='номер', **NULLABLE)
     avatar = models.ImageField(upload_to='users/', verbose_name='аватар', **NULLABLE)
-    country = CountryField(verbose_name='страна')  # installed package django-countries with pyuca translation
+    country = CountryField(verbose_name='страна',
+                           **NULLABLE)  # installed package django-countries with pyuca translation
     token = models.CharField(max_length=100, default=uuid.uuid4)
     is_verified = models.BooleanField(default=False, verbose_name='Верифицирован')
 

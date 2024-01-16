@@ -48,7 +48,9 @@
                     class="text-muted">/peace</small>
             </h1>
             <a href="{% url 'catalog:product' product.id %}" class="btn btn-outline-primary">More</a>
+            {% if product.user == user or user.is_staff %}
             <a href="{% url 'catalog:update_product' product.id %}" class="btn btn-outline-warning">Edit</a>
+            {% endif %}
             <a href="{% url 'catalog:delete_product' product.id %}" class="btn btn-outline-danger">Delete</a>
         </div>
     </div>
