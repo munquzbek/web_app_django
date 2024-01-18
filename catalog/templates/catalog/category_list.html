@@ -1,0 +1,27 @@
+{% extends 'catalog/base.html'%}
+{% block content %}
+
+{% for category in object_list %}
+<div class="col-6">
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <h4>{{ category.name }}</h4>
+        </div>
+        <div class="card-body">
+            <h5> Description: </h5>
+            {% if category.description|length > 100 %}
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+                {{ category.description|slice:"0:100" }}...
+            </h6>
+            {% else %}
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+                {{ category.description }}
+            </h6>
+            {% endif %}
+            <p class="card-text">Create time: {{ category.created_at }}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

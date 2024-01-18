@@ -6,13 +6,15 @@ from users.views import RegisterView, ProfileView, PasswordResetView1, verify, s
 
 from django.contrib.auth import views as auth_views
 
+from django.views.decorators.cache import never_cache
+
 app_name = UsersConfig.name
 
 urlpatterns = [
     path('login/', LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', RegisterView.as_view(), name='register'),
-    path('profile/', ProfileView.as_view(), name='profile'),
+    path('profile/', never_cache(ProfileView.as_view()), name='profile'),
     path('verify/<str:token>', verify),
     path('success/', success, name='success'),
     path('verify_email/', verify_email, name='verify'),

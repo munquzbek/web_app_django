@@ -8,6 +8,7 @@
         {% if user.is_verified %}
             <li><a href="{% url 'catalog:products' %}" class="text-dark">Products</a></li>
             <li><a href="{% url 'blog:blog_list' %}" class="text-dark">Blog</a></li>
+            <li><a href="{% url 'catalog:list_category' %}" class="text-dark">Categories</a></li>
         {% endif %}
     </ul>
 </div>

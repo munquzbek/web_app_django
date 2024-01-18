@@ -1,10 +1,11 @@
+from catalog.services import get_queryset_from_models
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from catalog.forms import ProductCreateForm, VersionForm
-from catalog.models import Product, Version
+from catalog.models import Product, Version, Category
 
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
@@ -131,3 +132,13 @@ class ProductUpdateView(LoginRequiredMixin, UserIsVerified, UpdateView):
 class ProductDeleteView(LoginRequiredMixin, UserIsVerified, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:products')
+
+
+@login_required
+@user_passes_test(lambda u: u.is_verified, login_url='users/verify_email/')
+def category_list(request):
+    context = {
+        'object_list': get_queryset_from_models(Category),
+        'title': 'Categories'
+    }
+    return render(request, 'catalog/category_list.html', context)
